@@ -7,7 +7,7 @@ export class Coracao{
     ){}
 
 
-    public exibirCoracao(): string {
+    public exibiCoracao(): string {
         if(this.cheio){
             return this.urlCoracaoCheio
         }else{

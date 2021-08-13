@@ -15,8 +15,8 @@ export class PainelComponent implements OnInit {
   public resposta: string = ''
   public rodada: number = 0
   public rodadaFrase!:Frase
-
   public progresso : number = 0
+  public tentativas:number = 3
 
   constructor() { 
     this.atualizaRodada()
@@ -28,23 +28,25 @@ export class PainelComponent implements OnInit {
   public atualizaResposta(resposta: Event): void{
     //HTMLInputElement -> diz para o typescript que estamos querendo pegar o value de um HTML
     this.resposta = (<HTMLInputElement>resposta.target).value
-    //console.log(this.resposta)
   }
 
   public verificarResposta(): void{
 
     if (this.rodadaFrase.frasePtBr === this.resposta){
-       //trocar pergunta da rodada
        this.rodada++    
        this.progresso = this.progresso + (100 / this.frases.length)
+       if(this.rodada === 4){
+         alert('Concluiu com Sucesso, parabens!!!')
+       }
+
        console.log( this.progresso)
-       this.atualizaRodada()
-       alert('Traducao esta ok')
-      
+       this.atualizaRodada()      
     }else{
-      alert('Traducao falhou')
+      this.tentativas--
+      if(this.tentativas === -1){
+        alert('Você perdeu todas as tentativas.')
+      }
     }
-   
   }
 
   public atualizaRodada():void{
